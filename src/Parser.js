@@ -1,16 +1,17 @@
 export class Parser {
 	constructor() {
-		this.root_element = [{
+		this.root_element = {
 			title: null,
 			isRoot: true,
 			children: []
-		}];
+		};
 
 		this.parent_elements = null;
 	}
 
 	parse_element(el) {
 		const indentation_level = el.match(/^( *)/gi)[0].length;
+
 		let title = el.substr(indentation_level);
 		const data = {
 			title, 
@@ -24,7 +25,7 @@ export class Parser {
 
 	parse(text) {
 		this.parent_elements = [Object.assign({}, this.root_element)];
-		text.split('\n').forEach(this.parse_element);
+		text.split('\n').forEach((el) => this.parse_element(el));
 
 		return this.parent_elements.shift();
 	}
