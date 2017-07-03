@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { ListElement } from './ListElement.js';
 import { Parser } from './Parser.js';
 
+import './App.css';
+
 var text = "\
 page 1\n\
   page 1.1\n\
@@ -33,24 +35,31 @@ class App extends Component {
 
   on_text_change(evt) {
     const text = evt.target.value;
-    console.log(text);
     this.setState({
-      cursor: this.state.cursor,
-      text: text,
+      text,
       data: this.parser.parse(text)
     })
-    console.log(arguments);
   }
 
   render() {
     const rows = this.state.data.children.map((el) => {
-      return <ListElement title={el.title} children={el.children} key={JSON.stringify(el)} />;
+      return <ListElement 
+        title={ el.title } 
+        children={ el.children } 
+        key={ el.id } 
+      />;
     });
 
     return (
-      <div>
-        {rows}
-        <textarea value={ this.state.text } onChange={this.on_text_change} className="input"></textarea>
+      <div className="container">
+        <textarea 
+          value={ this.state.text } 
+          onChange={ this.on_text_change } 
+          className="input-form"
+        ></textarea>
+        <div className="rows">
+          { rows }
+        </div>
       </div>
     );
   }

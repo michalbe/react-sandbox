@@ -7,12 +7,12 @@ export class ListElement extends Component {
         return <ListElement title={el.title} children={el.children} key={JSON.stringify(el)} />;
     });
     return (
-      <div className="list-parent">
-        { this.props.title }
+      <details className="list-parent">
+        <summary>{ this.props.title }</summary>
         <div className="children">
             {children}
         </div>
-      </div>
+      </details>
     );
   }
 }

@@ -3,10 +3,12 @@ export class Parser {
 		this.root_element = {
 			title: null,
 			isRoot: true,
-			children: []
+			children: [],
+			el_id: -1
 		};
 
 		this.parent_elements = null;
+		this.el_id = 0;
 	}
 
 	parse_element(el) {
@@ -14,6 +16,7 @@ export class Parser {
 
 		let title = el.substr(indentation_level);
 		const data = {
+			id: this.el_id++,
 			title, 
 			isRoot: false,
 			children: []
@@ -27,9 +30,11 @@ export class Parser {
 	}
 
 	parse(text) {
+		this.el_id = 0;
+
 		// This isn't the smartest deep cloning of JS objects, but it works
 		this.parent_elements = [JSON.parse(JSON.stringify(this.root_element))];
-		
+
 		text.split('\n').forEach((el) => this.parse_element(el));
 		return this.parent_elements.shift();
 	}
