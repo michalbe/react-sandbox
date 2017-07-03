@@ -15,6 +15,11 @@ textarea.input-form {
   top: 50%;
 }
 
+.rows {
+  border: 1px solid #999;
+  padding: 2px;
+}
+
 textarea.input-form {
   resize: none;
 }
