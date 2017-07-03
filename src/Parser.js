@@ -18,15 +18,19 @@ export class Parser {
 			isRoot: false,
 			children: []
 		};
-
+		
 		this.parent_elements[(indentation_level/2) + 1] = data;
-		this.parent_elements[(indentation_level/2)].children.push(data);
+
+		if (this.parent_elements[(indentation_level/2)]) {
+			this.parent_elements[(indentation_level/2)].children.push(data);
+		}
 	}
 
 	parse(text) {
-		this.parent_elements = [Object.assign({}, this.root_element)];
+		// This isn't the smartest deep cloning of JS objects, but it works
+		this.parent_elements = [JSON.parse(JSON.stringify(this.root_element))];
+		
 		text.split('\n').forEach((el) => this.parse_element(el));
-
 		return this.parent_elements.shift();
 	}
 }

@@ -20,21 +20,38 @@ page 5\
 "
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.parser = new Parser();
-    this.data = this.parser.parse(text);
-    console.log(this.data);
+    this.state = { 
+      text,
+      data: this.parser.parse(text)
+    };
+
+    this.on_text_change = this.on_text_change.bind(this);
+  }
+
+  on_text_change(evt) {
+    const text = evt.target.value;
+    console.log(text);
+    this.setState({
+      cursor: this.state.cursor,
+      text: text,
+      data: this.parser.parse(text)
+    })
+    console.log(arguments);
   }
 
   render() {
-    const rows = this.data.children.map((el) => {
+    const rows = this.state.data.children.map((el) => {
       return <ListElement title={el.title} children={el.children} key={JSON.stringify(el)} />;
     });
 
-    console.log(rows);
     return (
-      <div>{rows}</div>
+      <div>
+        {rows}
+        <textarea value={ this.state.text } onChange={this.on_text_change} className="input"></textarea>
+      </div>
     );
   }
 }
