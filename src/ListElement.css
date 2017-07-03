@@ -1,0 +1,7 @@
+.list-parent {
+    padding: 5px;
+}
+
+.list-parent .children {
+    margin-left: 15px;
+}

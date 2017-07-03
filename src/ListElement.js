@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ListElement.css';
 
 export class ListElement extends Component {
   render() {
@@ -6,7 +7,7 @@ export class ListElement extends Component {
         return <ListElement title={el.title} children={el.children} key={JSON.stringify(el)} />;
     });
     return (
-      <div>
+      <div className="list-parent">
         { this.props.title }
         <div className="children">
             {children}
