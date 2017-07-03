@@ -2,7 +2,7 @@
   "name": "list-parser-renderer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://michalbe.github.io/react-sandbox",
+  "homepage": "https://michalbe.github.io/react-sandbox",
   "devDependencies": {
     "gh-pages": "^1.0.0",
     "react-scripts": "1.0.10"
